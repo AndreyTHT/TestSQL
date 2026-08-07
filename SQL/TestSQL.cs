@@ -1,4 +1,5 @@
 using SQL.Repositories;
+using SQL.Services;
 using System.Data;
 
 namespace SQL
@@ -12,22 +13,47 @@ namespace SQL
         {
             InitializeComponent();
             db = new SqlExecutor();
+
+            getProducts();
+            getOrders();
         }
 
-        private async void getProductsBtn_Click(object sender, EventArgs e)
+        private async void getProducts()
         {
-            List<Product> products = new List<Product>();
             ProductRepository productRepository = new ProductRepository(db);
             DataTable productTable = await productRepository.GetAllProducts();
-            dataGridView.DataSource = productTable;
+
+            //ProductService productService = new ProductService();
+            //List<Product> products = productService.GetProductListFromTable(productTable);
+
+            var loc = new Point(5, 12);
+
+            foreach (DataColumn column in productTable.Columns)
+            {
+                var l = new Label();
+                l.Parent = panel1;
+                l.Location = loc;
+                loc.X += l.Width;
+                l.Text = column.ColumnName;
+            }
+
+            // перебор всех строк таблицы
+            foreach (DataRow row in productTable.Rows)
+            {
+                // получаем все ячейки строки
+                var cells = row.ItemArray;
+                foreach (object cell in cells)
+                {
+                    Console.Write("\t{0}", cell);
+                }
+            }
         }
 
-        private async void getOrdersBtn_Click(object sender, EventArgs e)
+        private async void getOrders()
         {
             List<Order> orders = new List<Order>();
             OrderRepository orderRepository = new OrderRepository(db);
             DataTable orderTable = await orderRepository.GetAllOrders();
-            dataGridView.DataSource = orderTable;
         }
     }
 }

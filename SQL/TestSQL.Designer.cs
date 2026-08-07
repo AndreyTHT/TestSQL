@@ -29,64 +29,86 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestSQL));
-            getProductsBtn = new Button();
-            getOrdersBtn = new Button();
-            dataGridView = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            tabControl1 = new TabControl();
+            tabProducts = new TabPage();
+            panel1 = new Panel();
+            tabOrders = new TabPage();
+            tabOrderProducts = new TabPage();
+            tabControl1.SuspendLayout();
+            tabProducts.SuspendLayout();
             SuspendLayout();
             // 
-            // getProductsBtn
+            // tabControl1
             // 
-            getProductsBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            getProductsBtn.Location = new Point(35, 12);
-            getProductsBtn.Name = "getProductsBtn";
-            getProductsBtn.Size = new Size(486, 49);
-            getProductsBtn.TabIndex = 0;
-            getProductsBtn.Text = "Получить товары";
-            getProductsBtn.UseVisualStyleBackColor = true;
-            getProductsBtn.Click += getProductsBtn_Click;
+            tabControl1.Controls.Add(tabProducts);
+            tabControl1.Controls.Add(tabOrders);
+            tabControl1.Controls.Add(tabOrderProducts);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(0, 0);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(551, 499);
+            tabControl1.TabIndex = 0;
             // 
-            // getOrdersBtn
+            // tabProducts
             // 
-            getOrdersBtn.Font = new Font("Segoe UI", 12F);
-            getOrdersBtn.Location = new Point(35, 79);
-            getOrdersBtn.Name = "getOrdersBtn";
-            getOrdersBtn.Size = new Size(486, 55);
-            getOrdersBtn.TabIndex = 3;
-            getOrdersBtn.Text = "Получить заказы";
-            getOrdersBtn.UseVisualStyleBackColor = true;
-            getOrdersBtn.Click += getOrdersBtn_Click;
+            tabProducts.Controls.Add(panel1);
+            tabProducts.Location = new Point(4, 24);
+            tabProducts.Name = "tabProducts";
+            tabProducts.Padding = new Padding(3);
+            tabProducts.Size = new Size(543, 471);
+            tabProducts.TabIndex = 0;
+            tabProducts.Text = "Products";
+            tabProducts.UseVisualStyleBackColor = true;
             // 
-            // dataGridView
+            // panel1
             // 
-            dataGridView.AllowUserToAddRows = false;
-            dataGridView.AllowUserToDeleteRows = false;
-            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new Point(35, 152);
-            dataGridView.Name = "dataGridView";
-            dataGridView.ReadOnly = true;
-            dataGridView.Size = new Size(486, 335);
-            dataGridView.TabIndex = 4;
+            panel1.AutoScroll = true;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(537, 465);
+            panel1.TabIndex = 0;
+            // 
+            // tabOrders
+            // 
+            tabOrders.Location = new Point(4, 24);
+            tabOrders.Name = "tabOrders";
+            tabOrders.Padding = new Padding(3);
+            tabOrders.Size = new Size(543, 471);
+            tabOrders.TabIndex = 1;
+            tabOrders.Text = "Orders";
+            tabOrders.UseVisualStyleBackColor = true;
+            // 
+            // tabOrderProducts
+            // 
+            tabOrderProducts.Location = new Point(4, 24);
+            tabOrderProducts.Name = "tabOrderProducts";
+            tabOrderProducts.Size = new Size(543, 471);
+            tabOrderProducts.TabIndex = 2;
+            tabOrderProducts.Text = "OrderProducts";
+            tabOrderProducts.UseVisualStyleBackColor = true;
             // 
             // TestSQL
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(551, 499);
-            Controls.Add(dataGridView);
-            Controls.Add(getOrdersBtn);
-            Controls.Add(getProductsBtn);
+            Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TestSQL";
             Text = "TestSQL";
-            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
+            tabControl1.ResumeLayout(false);
+            tabProducts.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button getProductsBtn;
-        private Button getOrdersBtn;
-        private DataGridView dataGridView;
+        private TabControl tabControl1;
+        private TabPage tabProducts;
+        private TabPage tabOrders;
+        private TabPage tabOrderProducts;
+        private Panel panel1;
     }
 }
