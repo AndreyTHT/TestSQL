@@ -5,18 +5,22 @@ using System.Threading.Tasks;
 
 namespace SQL
 {
-    public static class SqlConnect
+    public class SqlExecutor
     {
-        private static readonly NpgsqlDataSource db =
-            NpgsqlDataSource.Create(
-                "Host=localhost;" +
-                "Port=5432;" +
-                "Database=shopdb;" +
-                "Username=postgres;" +
-                "Password=admin");
+        private readonly NpgsqlDataSource db;
+
+        public SqlExecutor()
+        {
+            db = NpgsqlDataSource.Create(
+             "Host=localhost;" +
+             "Port=5432;" +
+             "Database=shopdb;" +
+             "Username=postgres;" +
+             "Password=admin");
+        }
 
         // Возвращает число - например, количество строк по заданному условию
-        public static async Task<int> GetScalarAsync(string sql, params object[] parameters)
+        public async Task<int> GetScalarAsync(string sql, params object[] parameters)
         {
             await using NpgsqlCommand command = db.CreateCommand(sql);
 
@@ -31,7 +35,7 @@ namespace SQL
         }
 
         // Выполнение SQL команды без ответа (возвращает число - количество затронутых строк) - например запись новой строки
-        public static async Task<int> ExecuteAsync(string sql, params object[] parameters)
+        public async Task<int> ExecuteAsync(string sql, params object[] parameters)
         {
             await using NpgsqlCommand command = db.CreateCommand(sql);
 
@@ -44,7 +48,7 @@ namespace SQL
         }
 
         // Выполнение SQL команды с ответом (возвращает DataTable) - например вывод строк
-        public static async Task<DataTable> SelectAsync(string sql, params object[] parameters)
+        public async Task<DataTable> SelectAsync(string sql, params object[] parameters)
         {
             await using NpgsqlCommand command = db.CreateCommand(sql);
 

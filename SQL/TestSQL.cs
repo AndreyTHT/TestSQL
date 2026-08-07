@@ -1,46 +1,30 @@
+using SQL.Repositories;
 using System.Data;
 
 namespace SQL
 {
     public partial class TestSQL : Form
     {
+
+        private readonly SqlExecutor db;
+
         public TestSQL()
         {
             InitializeComponent();
+            db = new SqlExecutor();
         }
 
-        private async void executeBtn_Click(object sender, EventArgs e)
+        private async void getProductsBtn_Click(object sender, EventArgs e)
         {
-            string sql = textOfSQL.Text;
-
-            try
-            {
-                if (rbExecute.Checked)
-                {
-                    int res = await SqlConnect.ExecuteAsync(sql);
-                    MessageBox.Show($"Затронуто строк: {res}");
-                }
-                else if (rbSelect.Checked)
-                {
-                    dataGridView.DataSource = null; 
-                    DataTable table = await SqlConnect.SelectAsync(sql);
-                    dataGridView.DataSource = table;
-                }
-                else
-                {
-                    var res = await SqlConnect.GetScalarAsync(sql);
-                    MessageBox.Show($"Результат: {res}");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}");
-            }
+            List<Product> products = new List<Product>();
+            ProductRepository productRepository = new ProductRepository(db);
+            DataTable productTable = await productRepository.GetAllProducts();
+            dataGridView.DataSource = productTable;
         }
 
-        private void clearBtn_Click(object sender, EventArgs e)
+        private void getOrdersBtn_Click(object sender, EventArgs e)
         {
-            dataGridView.DataSource = null;
+
         }
     }
 }
