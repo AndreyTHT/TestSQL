@@ -22,9 +22,12 @@ namespace SQL
             dataGridView.DataSource = productTable;
         }
 
-        private void getOrdersBtn_Click(object sender, EventArgs e)
+        private async void getOrdersBtn_Click(object sender, EventArgs e)
         {
-
+            List<Order> orders = new List<Order>();
+            OrderRepository orderRepository = new OrderRepository(db);
+            DataTable orderTable = await orderRepository.GetAllOrders();
+            dataGridView.DataSource = orderTable;
         }
     }
 }
