@@ -3,7 +3,7 @@
     internal record Order(
         int Id,
         string? UserId,
-        int? TotalPrice,
+        decimal? TotalPrice,
         DateTime? OrderDate,
         string? DeliveryType,
         string? RecipientName,

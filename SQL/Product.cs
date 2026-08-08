@@ -6,7 +6,7 @@
         string? Name,
         string? Image,
         int? CategoryId,
-        int? Price,
+        decimal? Price,
         int? Count
     );
 }
