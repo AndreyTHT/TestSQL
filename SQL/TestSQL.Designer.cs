@@ -33,9 +33,11 @@
             tabProducts = new TabPage();
             panel1 = new Panel();
             tabOrders = new TabPage();
+            panel2 = new Panel();
             tabOrderProducts = new TabPage();
             tabControl1.SuspendLayout();
             tabProducts.SuspendLayout();
+            tabOrders.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -72,6 +74,7 @@
             // 
             // tabOrders
             // 
+            tabOrders.Controls.Add(panel2);
             tabOrders.Location = new Point(4, 24);
             tabOrders.Name = "tabOrders";
             tabOrders.Padding = new Padding(3);
@@ -79,6 +82,15 @@
             tabOrders.TabIndex = 1;
             tabOrders.Text = "Orders";
             tabOrders.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            panel2.AutoScroll = true;
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(537, 465);
+            panel2.TabIndex = 0;
             // 
             // tabOrderProducts
             // 
@@ -100,6 +112,7 @@
             Text = "TestSQL";
             tabControl1.ResumeLayout(false);
             tabProducts.ResumeLayout(false);
+            tabOrders.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -110,5 +123,6 @@
         private TabPage tabOrders;
         private TabPage tabOrderProducts;
         private Panel panel1;
+        private Panel panel2;
     }
 }
