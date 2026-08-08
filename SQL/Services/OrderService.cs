@@ -17,7 +17,7 @@ namespace SQL.Services
                 (
                     Id: (int)row["Id"],
                     UserId: (string?)row["UserId"],
-                    TotalPrice: (int)row["TotalPrice"],
+                    TotalPrice: (decimal?)row["TotalPrice"],
                     OrderDate: (DateTime)row["OrderDate"],
                     DeliveryType: (string?)row["DeliveryType"],
                     RecipientName: (string?)row["RecipientName"],

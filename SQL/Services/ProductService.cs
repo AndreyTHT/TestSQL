@@ -17,7 +17,7 @@ namespace SQL.Services
                     Name: (string?)row["Name"],
                     Image: (string?)row["Image"],
                     CategoryId: (int?)row["CategoryId"],
-                    Price: (int?)row["Price"],
+                    Price: (decimal?)row["Price"],
                     Count: (int?)row["Count"]
                 );
                 products.Add(product);
