@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using System.Data;
-using System.Net;
-using System.Xml.Linq;
+﻿using System.Data;
 
 namespace SQL.Services
 {

@@ -1,8 +1,5 @@
 using SQL.Repositories;
-using SQL.Services;
 using System.Data;
-using System.Reflection;
-using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 
 namespace SQL
 {
