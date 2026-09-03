@@ -1,13 +1,22 @@
 ﻿using System.Data;
+using SQL.Repositories;
 
 namespace SQL.Services
 {
     internal class ProductService
     {
         private List<Product> products = new List<Product>();
+        private readonly ProductRepository productRepository;
 
-        public List<Product> GetProductListFromTable(DataTable table)
+        public ProductService(ProductRepository productRepository)
         {
+            this.productRepository = productRepository;
+        }
+
+        public async Task<List<Product>> GetProductListFromTable()
+        {
+            var table = await productRepository.GetAllProducts();
+
             foreach (DataRow row in table.Rows)
             {
                 Product product = new Product

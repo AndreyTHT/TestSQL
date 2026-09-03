@@ -1,16 +1,22 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using System.Data;
-using System.Net;
-using System.Xml.Linq;
+﻿using System.Data;
+using SQL.Repositories;
 
 namespace SQL.Services
 {
     internal class OrderService
     {
         private List<Order> orders = new List<Order>();
+        private readonly OrderRepository orderRepository;
 
-        public List<Order> GetOrderListFromTable(DataTable table)
+        public OrderService(OrderRepository orderRepository)
         {
+            this.orderRepository = orderRepository;
+        }
+
+        public async Task<List<Order>> GetOrderList()
+        {
+            var table = await orderRepository.GetAllOrders();
+
             foreach (DataRow row in table.Rows)
             {
                 Order order = new Order
