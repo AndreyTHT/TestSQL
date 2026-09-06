@@ -10,6 +10,7 @@
         string? RecipientPhone,
         string? RecipientEmail,
         string? Address,
-        string? Comment
+        string? Comment,
+        List<Product> Products
     );
 }

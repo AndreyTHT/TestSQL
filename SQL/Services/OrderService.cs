@@ -6,7 +6,6 @@ namespace SQL.Services
     internal class OrderService
     {
         private List<Order> orders = new List<Order>();
-        private List<OrderProduct> ordersProducts = new List<OrderProduct>();
         private readonly OrderRepository orderRepository;
         private readonly ProductRepository productRepository;
 
@@ -33,35 +32,21 @@ namespace SQL.Services
                     RecipientPhone: (string?)row["RecipientPhone"],
                     RecipientEmail: (string?)row["RecipientEmail"],
                     Address: (string?)row["Address"],
-                    Comment: (string?)row["Comment"]
+                    Comment: (string?)row["Comment"],
+                    Products: new List<Product>()
                 );
                 orders.Add(order);
             }
             return orders;
         }
 
-        public async Task<List<OrderProduct>> GetOrderProductList()
+        public async Task<List<Order>> GetOrderProductList()
         {
-            var table = await orderRepository.GetAllOrders();
+            var orderProduct = await GetOrderList();
 
-            foreach (DataRow row in table.Rows)
+            foreach (Order op in orderProduct)
             {
-                OrderProduct orderProduct = new OrderProduct
-                (
-                    Id: (int)row["Id"],
-                    UserId: (string?)row["UserId"],
-                    TotalPrice: (decimal?)row["TotalPrice"],
-                    OrderDate: (DateTime)row["OrderDate"],
-                    DeliveryType: (string?)row["DeliveryType"],
-                    RecipientName: (string?)row["RecipientName"],
-                    RecipientPhone: (string?)row["RecipientPhone"],
-                    RecipientEmail: (string?)row["RecipientEmail"],
-                    Address: (string?)row["Address"],
-                    Comment: (string?)row["Comment"],
-                    Products: new List<Product>()
-                );
-
-                var orderP = await orderRepository.GetOrderProductsByOrderId(orderProduct.Id);
+                var orderP = await orderRepository.GetOrderProductsByOrderId(op.Id);
                 foreach (DataRow r in orderP.Rows)
                 {
                     var products = await productRepository.GetProductById((int)r["ProductId"]);
@@ -76,12 +61,11 @@ namespace SQL.Services
                         Price: (decimal?)r["TotalPrice"],
                         Count: (int?)r["Count"]
                     );
-                    orderProduct.Products.Add(product);
+                    op.Products.Add(product);
                 }
-
-                ordersProducts.Add(orderProduct);
             }
-            return ordersProducts;
+
+            return orderProduct;
         }
     }
 }
