@@ -16,5 +16,11 @@ namespace SQL.Repositories
             string sql = "SELECT * FROM \"Orders\"";
             return await db.SelectAsync(sql);
         }
+
+        public async Task<DataTable> GetOrderProducts()
+        {
+            string sql = "SELECT * FROM \"OrderProducts\"";
+            return await db.SelectAsync(sql);
+        }
     }
 }
