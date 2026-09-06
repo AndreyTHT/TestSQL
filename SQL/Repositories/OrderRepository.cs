@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Npgsql;
+using System.Data;
 
 namespace SQL.Repositories
 {
@@ -15,6 +16,13 @@ namespace SQL.Repositories
         {
             string sql = "SELECT * FROM \"Orders\"";
             return await db.SelectAsync(sql);
+        }
+
+        public async Task<DataTable> GetOrderProductsByOrderId(int id)
+        {
+            var parameter = new NpgsqlParameter("$1", id);
+            string sql = "SELECT * FROM \"OrderProducts\" WHERE OrderId = ($1)";
+            return await db.SelectAsync(sql, parameter);
         }
     }
 }
